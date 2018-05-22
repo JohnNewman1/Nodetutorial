@@ -1,3 +1,5 @@
+const Sequelize = require('sequelize');
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -8,6 +10,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+const sequelize = new Sequelize('postgres://localhost:5432/makersbnb');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

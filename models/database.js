@@ -1,12 +1,23 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('postgres://localhost:5432/todo');
+const sequelize = new Sequelize('postgres://localhost:5432/makersbnb');
 
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.');
+const Space = sequelize.define('space', {
+  title: {
+    type: Sequelize.STRING
+  },
+  description: {
+    type: Sequelize.STRING
+  },
+  nightPrice: {
+    type: Sequelize.INTEGER
+  }
+});
+
+Space.sync({force: true}).then(() => {
+  return Space.create({
+    title: "Ellie\'s space",
+    description: "A small hole in the ground",
+    nightPrice: 100000
   })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
+})
